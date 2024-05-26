@@ -1,0 +1,16 @@
+.bg-blues{
+    background-image: linear-gradient(to right, #3882C7, #21B9DE);
+
+}
+
+.bg-blue{
+    background-color: #21B9DE;
+}
+.bg-blueclaro{
+    background-color: #3882C7;
+}
+
+/* 
+.imag{
+    width: 50px;
+} */
