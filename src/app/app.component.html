@@ -26,7 +26,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let empresa of empresas">
-      <td>{{ empresa.entrada == '1' ? 'Ganho' : 'Perda' }}</td>
+      <td>{{ empresa.entrada == '1' ? 'Ganho' : 'Gasto' }}</td>
       <td>{{ empresa.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</td>
       <td>{{ empresa.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
       <td>{{ empresa.historico }}</td>
