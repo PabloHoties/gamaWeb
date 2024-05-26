@@ -46,12 +46,14 @@ export class AppComponent implements OnInit {
     this.httpClient.get('http://localhost:8080/api/empresas/desempenho')
       .subscribe({
         next: (data: any) => {
-          this.insights = data.desempenho;
+          // Substitua todas as ocorrências de \n por <br> na string de insights
+          this.insights = data.desempenho.replace(/\n/g, '<br>');
         },
         error: (e) => {
           console.log(e.error);
         }
       });
   }
+  
   
 }
