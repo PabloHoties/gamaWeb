@@ -1,47 +1,69 @@
 <div class="py-5 bg-blue">
-  <!-- Navbar Brand-->
-  <a class="" href="#"><img class="imag mx-5 border-box p-2 bg-white rounded" src="assets/img/logo.svg" alt=""></a>
-</div>
-
-<div class="container-fluid px-4 text-center">
-  <h1 class="my-4">Desenvolvimento de Soluções</h1>
   <div class="row">
-    <div class="d-flex justify-content-center">
-      <div class="">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="loadInsights()">Insights</button>
+    <div class="col-md-4">
+      <!-- Navbar Brand-->
+      <a class="" href="#"><img class="imag mx-5 border-box p-2 bg-white rounded" src="assets/img/logo.svg" alt=""></a>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h3>Fluxo bancário</h3>
+          <div>Consulta dos últimos 1mil dias</div>
+          <strong>Empresa: 0cfec9f7-9ae8-4172-deb9-08db1f72fd10</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h6><strong>Integração com inteligência artificial:</strong></h6>
+          <br/>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          (click)="loadInsights()">Ver Insights</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Fluxo</th>
-      <th>Data e Hora</th>
-      <th>Valor</th>
-      <th>Histórico</th>
-      <th>Saldo Anterior</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let empresa of empresas">
-      <td>{{ empresa.entrada == '1' ? 'Ganho' : 'Gasto' }}</td>
-      <td>{{ empresa.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</td>
-      <td>{{ empresa.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
-      <td>{{ empresa.historico }}</td>
-      <td>{{ empresa.saldoAnterior | currency:'BRL':'symbol':'1.2-2' }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="m-4">
+  <table class="table table-bordered table-striped table-sm table-hover">
+    <thead>
+      <tr>
+        <th>Fluxo</th>
+        <th>Data e Hora</th>
+        <th>Valor</th>
+        <th>Histórico</th>
+        <th>Saldo Anterior</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empresa of empresas | paginate: { itemsPerPage: 10, currentPage: paginador }">
+        <td>{{ empresa.entrada == '1' ? 'Ganho' : 'Gasto' }}</td>
+        <td>{{ empresa.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ empresa.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>{{ empresa.historico }}</td>
+        <td>{{ empresa.saldoAnterior | currency:'BRL':'symbol':'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center m-2">
+    <pagination-controls (pageChange)="handlePageChange($event)" previousLabel="Próxima anterior"
+      nextLabel="Próxima página">
+    </pagination-controls>
+  </div>
+</div>
 
 <footer class="py-4 bg-blueclaro mt-auto container-fluid px-4">
   <div class="">
     <div class="d-flex md-flex-direction">
       <div>
         <h1 class="text-white">A Giom</h1>
-        <p class="text-white">Empresa focada no desenvolvimento de soluções web, mobile e integrações entre sistemas. Possuímos anos de
-          experiência em soluções personalizadas, e hoje contamos com uma equipe qualificada para atender a necessidade da sua empresa. Entre em contato para saber como podemos lhe ajudar.</p>
+        <p class="text-white">Empresa focada no desenvolvimento de soluções web, mobile e integrações entre sistemas.
+          Possuímos anos de
+          experiência em soluções personalizadas, e hoje contamos com uma equipe qualificada para atender a necessidade
+          da sua empresa. Entre em contato para saber como podemos lhe ajudar.</p>
       </div>
     </div>
     <div class="small">
@@ -55,15 +77,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Desempenho</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Análise de desempenho</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" [innerHTML]="insights">
-      >
+        >
         {{ insights }}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>

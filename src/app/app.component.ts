@@ -4,6 +4,7 @@ import { Component, OnInit, LOCALE_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -11,7 +12,7 @@ registerLocaleData(localePt, 'pt-BR');
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, NgxPaginationModule],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
   empresas: any[] = [];
   insights: string = '';
 
+  paginador: number = 1;
   
   constructor(
     private httpClient: HttpClient
@@ -55,5 +57,7 @@ export class AppComponent implements OnInit {
       });
   }
   
-  
+  handlePageChange(event: any) : void {
+    this.paginador = event;
+  }
 }
